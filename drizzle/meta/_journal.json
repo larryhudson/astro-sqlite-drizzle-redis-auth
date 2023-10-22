@@ -1,0 +1,20 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1697926101992,
+      "tag": "0000_melted_puff_adder",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1698008840748,
+      "tag": "0001_silent_wallow",
+      "breakpoints": true
+    }
+  ]
+}

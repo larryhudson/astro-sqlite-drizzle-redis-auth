@@ -1,0 +1,26 @@
+---
+import Layout from "@src/components/Layout.astro";
+import { getUnapprovedUsers } from "@src/auth";
+
+const unapprovedUsers = getUnapprovedUsers();
+---
+
+<Layout>
+  <p>This is a page this is just for admins.</p>
+  <p>This is where admins can approve users.</p>
+
+  <h2>Unapproved users</h2>
+  <pre>{JSON.stringify(unapprovedUsers,null,2)}</pre>
+
+  <ul>
+    {
+      unapprovedUsers.map((user) => (
+        <li>
+          {user.name} ({user.email}, signed up at {user.createdAt})
+          <form method="POST" action={`/auth/users/${user.id}`}>
+            <button name="action" value="approve">Approve</button>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>

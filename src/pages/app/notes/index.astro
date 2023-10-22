@@ -1,0 +1,46 @@
+---
+import Layout from "@src/components/Layout.astro";
+import { db } from "@src/db";
+import { notes as notesTable } from "@src/db/schema";
+import type { InsertNote } from "@src/db/schema";
+import { eq } from "drizzle-orm";
+
+const user = Astro.locals.user;
+
+if (Astro.request.method === "POST") {
+  const formData = await Astro.request.formData();
+
+  const title = formData.get("title");
+  const body = formData.get("body");
+  const userId = user.id;
+
+  const newNoteValues = { title, body, userId } as InsertNote;
+
+  await db.insert(notesTable).values(newNoteValues).returning();
+}
+
+const notes = await db
+  .select()
+  .from(notesTable)
+  .where(eq(notesTable.userId, user.id));
+---
+
+<Layout>
+  <h2>Notes</h2>
+  <pre>{JSON.stringify(notes, null, 2)}</pre>
+
+  <h2>Add new</h2>
+  <form method="POST">
+    <label
+      >Title
+      <input type="text" name="title" />
+    </label>
+
+    <label
+      >Body
+      <textarea name="body"></textarea>
+    </label>
+
+    <button>Add</button>
+  </form>
+</Layout>

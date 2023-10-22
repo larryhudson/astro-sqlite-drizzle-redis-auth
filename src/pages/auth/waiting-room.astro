@@ -1,0 +1,13 @@
+---
+import Layout from "@src/components/Layout.astro";
+
+const user = Astro.locals.user;
+
+if (user.isApproved) {
+  return Astro.redirect("/app/");
+}
+---
+
+<Layout>
+  <p>Your account hasn't been approved yet. Please check back later.</p>
+</Layout>

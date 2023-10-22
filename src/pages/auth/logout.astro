@@ -1,0 +1,9 @@
+---
+import { handleLogout } from "@src/auth";
+
+const logoutSuccess = await handleLogout(Astro);
+
+if (logoutSuccess) {
+  return Astro.redirect("/");
+}
+---

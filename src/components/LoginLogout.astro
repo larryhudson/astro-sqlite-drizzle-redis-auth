@@ -1,0 +1,11 @@
+---
+const user = Astro.locals.user;
+
+const loggedIn = !!user;
+---
+
+{loggedIn ? (
+<p>Logged in as {user.name}. <a href="/auth/logout/">Log out</a></p>
+) : (
+<p><a href="/auth/login/">Log in</a></p>
+)}

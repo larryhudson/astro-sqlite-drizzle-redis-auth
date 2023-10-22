@@ -1,0 +1,12 @@
+---
+import {approveUser} from "@src/auth";
+const {id} = Astro.params;
+if (Astro.request.method === "POST") {
+
+const formData = await Astro.request.formData();
+const action = formData.get("action");
+if (action === "approve") {
+  approveUser(id);
+}
+}
+---
